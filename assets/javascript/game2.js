@@ -8,11 +8,11 @@ var terms =["sword", "axe", "spear", "armor", "magic", "wizard", "dragon", "beho
 
 
 var word = "";
-var rand = Math.floor(Math.random()*terms.length);
+//var rand = Math.floor(Math.random()*terms.length);
 var to_find_arr = [];
 var to_find = "";
 var letters_guessed = [];
-word = terms[rand];
+//word = terms[rand];
 var numGuesses = 0;
 var numWins = 0;
 var targetDiv = document.getElementById("the-word");
@@ -20,6 +20,9 @@ var guessedDiv = document.getElementById("guessed-letters");
 var numGuessDiv = document.getElementById("guesses-left");
 var numWinsDiv = document.getElementById("num-wins");
 for(var i = 0; i < word.length; i++){
+    to_find_arr.forEach(function() {
+        
+    });
     to_find_arr[i] = "___.";
 }
 for(var k = 0; k < to_find_arr.length; k++){
@@ -27,11 +30,18 @@ for(var k = 0; k < to_find_arr.length; k++){
 }
 targetDiv.textContent = to_find;
 //Event listener for user keyboard presses
+document.addEventListener("DOMContentLoaded",function(event){
+startplay();
+});
+function startplay(){
 document.onkeyup = function(event){
-    var userGuess = event.key;
+    var userGuess = event.key.toLocaleLowerCase();
     var correct = false;
 
-//    var word = generateRandomWord();
+    var word = generateRandomWord();
+    if(word.indexOf(userGuess)>-1){
+        to_find_arr.push(userGuess)
+    }
     for(var j = 0; j < word.length; j++){
         if(userGuess.toLowerCase() === word.charAt(j)){
             to_find_arr[j] = userGuess;
@@ -101,5 +111,6 @@ document.onkeyup = function(event){
    return terms[rando];
    }
 };
+}
 
 
